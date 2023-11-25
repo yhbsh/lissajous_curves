@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"image"
 	"image/color"
 	"image/gif"
@@ -13,10 +14,15 @@ import (
 var palette = []color.Color{color.RGBA{0, 0, 0, 255}, color.RGBA{170, 220, 150, 255}, color.RGBA{60, 120, 150, 255}, color.RGBA{60, 90, 240, 255}}
 
 func main() {
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		lissajous(w)
-	})
+	fmt.Printf("[INFO]: server is listening at port %d\n", 8080)
+	http.HandleFunc("/", handler)
 	http.ListenAndServe(":8080", nil)
+
+}
+
+func handler(w http.ResponseWriter, r *http.Request) {
+	fmt.Printf("[INFO]: new request from %s\n", r.RemoteAddr)
+	lissajous(w)
 }
 
 func lissajous(out io.Writer) {
