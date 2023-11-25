@@ -6,5 +6,7 @@
 Read more about lissajous gif animations in here: https://en.wikipedia.org/wiki/Lissajous_curve
 
 # How To Run
-- go run main.go
+```console
+    go run main.go
+``` 
 - open http://localhost:8080 in a browser
