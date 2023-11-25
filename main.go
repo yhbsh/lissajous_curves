@@ -7,13 +7,16 @@ import (
 	"io"
 	"math"
 	"math/rand"
-	"os"
+	"net/http"
 )
 
 var palette = []color.Color{color.RGBA{0, 0, 0, 255}, color.RGBA{170, 220, 150, 255}, color.RGBA{60, 120, 150, 255}, color.RGBA{60, 90, 240, 255}}
 
 func main() {
-	lissajous(os.Stdout)
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		lissajous(w)
+	})
+	http.ListenAndServe(":8080", nil)
 }
 
 func lissajous(out io.Writer) {
